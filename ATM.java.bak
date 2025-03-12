@@ -1,0 +1,57 @@
+import java.util.*;
+class ATM {
+    private double balance;
+    private int pin;
+    private List<String> transactionHistory;
+
+    public ATM(int pin) {
+        this.balance = 0.0;
+        this.pin = pin;
+        this.transactionHistory = new ArrayList<>();
+    }
+
+    public boolean validatePin(int inputPin) {
+        return this.pin == inputPin;
+    }
+
+    public void changePin(int newPin) {
+        this.pin = newPin;
+        System.out.println("PIN successfully changed.");
+    }
+
+    public void checkBalance() {
+        System.out.println("Current Balance: $" + balance);
+    }
+
+    public void deposit(double amount) {
+        if (amount > 0) {
+            balance += amount;
+            transactionHistory.add("Deposited: $" + amount);
+            System.out.println("$" + amount + " deposited successfully.");
+        } else {
+            System.out.println("Invalid deposit amount.");
+        }
+    }
+
+    public void withdraw(double amount) {
+        if (amount > 0 && amount <= balance) {
+            balance -= amount;
+            transactionHistory.add("Withdrawn: $" + amount);
+            System.out.println("$" + amount + " withdrawn successfully.");
+        } else {
+            System.out.println("Invalid withdrawal amount or insufficient balance.");
+        }
+    }
+
+    public void viewTransactionHistory() {
+        if (transactionHistory.isEmpty()) {
+            System.out.println("No transactions available.");
+        } else {
+            System.out.println("Transaction History:");
+            for (String transaction : transactionHistory) {
+                System.out.println(transaction);
+            }
+        }
+    }
+}
+
